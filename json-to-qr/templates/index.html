@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'index.css' %}">
+{% endblock style %}
+
+{% block content %}
+    <center class="mt-2">
+        <h2>Json to QR</h2>
+    </center> 
+    <div class="container-fluid">
+        <div class="row justify-content-around">
+            <div id="json" class="col-5">
+                <form action="" id="form" method="post">
+                    {% csrf_token %}
+                    <label for="json_data"> Please Enter Json Data : </label>
+                    <textarea name="json" id="json_data" rows="15" ></textarea>
+                    <button class="btn btn-success" onclick="pretty_print()">Prettify</button>
+                    <input class="btn btn-primary float-right" type="submit" onclick="send_ajax_request()" value="Generate QR Code">
+                </form> 
+            </div>
+            <div class="vl"></div>
+            <div id="qr" class="col-5">
+                <labe> Entered Data : </label>
+                <textarea id="qr_data" rows="15" readonly></textarea>
+            </div>
+        </div>
+    </div>
+<hr>
+    <div class="mt-2">
+        <center>
+            <h2>Image will displayed here</h2>
+            <img src="" id="qr-img"  alt="" class="img-fluid">
+        </center>
+    </div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    let csrf = "{{csrf_token}}";
+    let file_path = "";
+    let media = "{{media}}";
+</script>
+<script src="{% static 'index.js' %}"></script>
+{% endblock script %}
